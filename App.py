@@ -19,6 +19,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import streamlit as st
+from PIL import Image
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
@@ -33,9 +34,11 @@ from sklearn.metrics import (
 # ----------------------------------------------------------------------------
 # PAGE CONFIG
 # ----------------------------------------------------------------------------
+icon = Image.open("assets/favicon.png")
 
 st.set_page_config(
-    page_title="Income Classification Dashboard",
+    page_title="Income Classification · ML Models",
+    page_icon=icon,
     layout="wide",
 )
 

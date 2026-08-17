@@ -1,13 +1,13 @@
-# Machine Learning Assignment 2 - Income Classification using UCI Adult Dataset
+# Machine Learning Assignment 2 - Income Classification using Adult Dataset
 
 ## a. Problem Statement
 
-The objective of this project is to build, evaluate, and deploy multiple machine learning classification models for predicting whether a person's income is less than or equal to 50K or greater than 50K based on demographic and employment-related attributes.
+The objective of this project is to build, evaluate, and deploy multiple machine learning classification models for predicting whether a person's income is less than or equal to 50K or greater than 50K based on demographic, employment-related and other attributes.
 
 ## b. Dataset Description
 
-- **Dataset Name:** UCI Adult / Census Income Dataset
-- **Source:** UCI Machine Learning Repository ([link](https://archive.ics.uci.edu/dataset/2/adult))
+- **Dataset Name:** Adult Census Income Dataset
+- **Source:** UCI Machine Learning Dataset Repository ([link](https://archive.ics.uci.edu/dataset/2/adult))
 - **Task Type:** Binary Classification
 - **Number of Instances:** 32,561 (after removing rows with a missing target)
 - **Number of Features:** 14 (6 numeric, 8 categorical)
@@ -26,7 +26,7 @@ The objective of this project is to build, evaluate, and deploy multiple machine
 
 ## c. GitHub Repository Link
 
-GitHub Repository: `<your GitHub repo link>`
+GitHub Repository: ([Income-Classification-using-Machine-Learning-Models](https://github.com/2025DA04170/Income-Classification-using-Machine-Learning-Models.git))
 
 ## d. Models Used
 
@@ -48,7 +48,7 @@ The following classification models were implemented on identical train/test spl
 | Naive Bayes | 0.5366 | 0.7334 | 0.3360 | 0.9471 | 0.4960 | 0.3237 |
 | Random Forest | 0.8597 | 0.9113 | 0.7904 | 0.5676 | 0.6607 | 0.5878 |
 
-*(Full precision values are in `model/metrics.csv`, regenerated automatically each time `train_models.py` is run.)*
+*(Full precision values are in `model/metrics.csv & model/metrics.json`, regenerated automatically each time `train_models.py` is run.)*
 
 ## Model Observations
 
@@ -63,7 +63,7 @@ The following classification models were implemented on identical train/test spl
 
 ## Streamlit App Link
 
-Live App: `<your Streamlit app link>`
+Live App: ([Income Classification · ML Models](https://income-classification-using-machine-learning-models.streamlit.app/))
 
 ## How to Run Locally
 
@@ -86,8 +86,9 @@ This regenerates `adult_cleaned.csv`, `test_data.csv`, all five `*_model.pkl` fi
 - `app.py` — Streamlit application
 - `requirements.txt` — Python dependencies
 - `README.md` — this file
-- `test_data.csv` — held-out test split (features + true label) for demoing the app
-- `adult_cleaned.csv` — cleaned full dataset
+- `data/raw/adult_income_raw.csv` — original dataset (downloaded from UCI repository)
+- `data/processed/test_data.csv` — held-out test split (features + true label) for demo
+- `data/processed/adult_cleaned.csv` — cleaned full dataset
 - `model/` — training script, saved model `.pkl` files, preprocessor, and metrics
 - `notebook/` — Jupyter notebook with the full implementation and exploration
-- `screenshots/` — BITS Virtual Lab execution screenshot
+- `assets/` — static assets for the Streamlit app (favicon)
