@@ -195,7 +195,7 @@ HEADER_SVG = """
     <line x1="57" y1="40" x2="67" y2="30" stroke="#94A3B8" stroke-width="2"/>
     <line x1="57" y1="50" x2="67" y2="60" stroke="#94A3B8" stroke-width="2"/>
   <text x="50%" y="40" text-anchor="middle" font-size="28" font-family="Arial" fill="white" font-weight="600">
-    Income Classification · ML Models Metrics · Dashboard
+    Income Classification · ML Multi-Model Metrics · Dashboard
   </text>
   <text x="50%" y="68" text-anchor="middle" font-size="14" font-family="Arial" fill="#dddddd">
     Adult Census Income Dataset · 5 Machine Learning Models
