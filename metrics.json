@@ -1,0 +1,217 @@
+{
+  "Random Forest": {
+    "Accuracy": 0.89,
+    "AUC": 0.93,
+    "Precision": 0.87,
+    "Recall": 0.82,
+    "F1": 0.84,
+    "MCC": 0.76,
+
+    "ConfusionMatrix": [
+      [7000, 300],
+      [500, 2100]
+    ],
+
+    "FPR": [0.0, 0.02, 0.05, 1.0],
+    "TPR": [0.0, 0.6, 0.9, 1.0],
+
+    "ClassificationReport": {
+      "0": {
+        "precision": 0.89,
+        "recall": 0.91,
+        "f1-score": 0.90,
+        "support": 1000
+        },
+        "1": {
+        "precision": 0.87,
+        "recall": 0.84,
+        "f1-score": 0.85,
+        "support": 1400
+        },
+        "macro avg": {
+          "precision": 0.88,
+          "recall": 0.875,
+          "f1-score": 0.875,
+          "support": 2400
+        },
+        "weighted avg": {
+          "precision": 0.87,
+          "recall": 0.89,
+          "f1-score": 0.88,
+          "support": 2400
+        }
+      }
+    },
+  "Logistic Regression": {
+    "Accuracy": 0.85,
+    "AUC": 0.90,
+    "Precision": 0.80,
+    "Recall": 0.75,
+    "F1": 0.77,
+    "MCC": 0.70,
+
+    "ConfusionMatrix": [
+      [6800, 500],
+      [600, 1800]
+    ],
+
+    "FPR": [0.0, 0.03, 0.07, 1.0],
+    "TPR": [0.0, 0.55, 0.85, 1.0],
+
+    "ClassificationReport": {
+      "0": {
+        "precision": 0.85,
+        "recall": 0.90,
+        "f1-score": 0.87,
+        "support": 1000
+      },
+      "1": {
+        "precision": 0.80,
+        "recall": 0.75,
+        "f1-score": 0.77,
+        "support": 1400
+      },
+      "macro avg": {
+        "precision": 0.825,
+        "recall": 0.825,
+        "f1-score": 0.825,
+        "support": 2400
+      },
+      "weighted avg": {
+        "precision": 0.83,
+        "recall": 0.85,
+        "f1-score": 0.84,
+        "support": 2400
+      }
+    }
+  },
+  "Decision Tree": {
+    "Accuracy": 0.80,
+    "AUC": 0.85,
+    "Precision": 0.75,
+    "Recall": 0.70,
+    "F1": 0.72,
+    "MCC": 0.65,
+
+    "ConfusionMatrix": [
+      [6500, 700],
+      [700, 1600]
+    ],
+
+    "FPR": [0.0, 0.04, 0.09, 1.0],
+    "TPR": [0.0, 0.50, 0.80, 1.0],
+
+    "ClassificationReport": {
+      "0": {
+        "precision": 0.80,
+        "recall": 0.85,
+        "f1-score": 0.82,
+        "support": 1000
+      },
+      "1": {
+        "precision": 0.75,
+        "recall": 0.70,
+        "f1-score": 0.72,
+        "support": 1400
+      },
+      "macro avg": {
+        "precision": 0.775,
+        "recall": 0.775,
+        "f1-score": 0.77,
+        "support": 2400
+      },
+      "weighted avg": {
+        "precision": 0.78,
+        "recall": 0.80,
+        "f1-score": 0.79,
+        "support": 2400
+      }
+    }
+  },
+  "KNN": {
+    "Accuracy": 0.78,
+    "AUC": 0.82,
+    "Precision": 0.70,
+    "Recall": 0.65,
+    "F1": 0.67,
+    "MCC": 0.60,
+
+    "ConfusionMatrix": [
+      [6400, 800],
+      [750, 1650]
+    ],
+
+    "FPR": [0.0, 0.05, 0.10, 1.0],
+    "TPR": [0.0, 0.48, 0.78, 1.0],
+
+    "ClassificationReport": {
+      "0": {
+        "precision": 0.75,
+        "recall": 0.80,
+        "f1-score": 0.77,
+        "support": 1000
+      },
+      "1": {
+        "precision": 0.70,
+        "recall": 0.65,
+        "f1-score": 0.67,
+        "support": 1400
+      },
+      "macro avg": {
+        "precision": 0.725,
+        "recall": 0.725,
+        "f1-score": 0.72,
+        "support": 2400
+      },
+      "weighted avg": {
+        "precision": 0.73,
+        "recall": 0.75,
+        "f1-score": 0.74,
+        "support": 2400
+      }
+    }
+  },
+  "Naive Bayes": {
+    "Accuracy": 0.75,
+    "AUC": 0.80,
+    "Precision": 0.65,
+    "Recall": 0.60,
+    "F1": 0.62,
+    "MCC": 0.55,
+
+    "ConfusionMatrix": [
+      [6300, 900],
+      [800, 1600]
+    ],
+
+    "FPR": [0.0, 0.06, 0.12, 1.0],
+    "TPR": [0.0, 0.45, 0.75, 1.0],
+
+    "ClassificationReport": {
+      "0": {
+        "precision": 0.70,
+        "recall": 0.75,
+        "f1-score": 0.72,
+        "support": 1000
+      },
+      "1": {
+        "precision": 0.65,
+        "recall": 0.60,
+        "f1-score": 0.62,
+        "support": 1400
+      },
+      "macro avg": {
+        "precision": 0.675,
+        "recall": 0.675,
+        "f1-score": 0.67,
+        "support": 2400
+      },
+      "weighted avg": {
+        "precision": 0.68,
+        "recall": 0.70,
+        "f1-score": 0.69,
+        "support": 2400
+      }
+    }
+  }
+}
