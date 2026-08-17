@@ -46,7 +46,7 @@ The following classification models were implemented on identical train/test spl
 | Decision Tree | 0.8153 | 0.7521 | 0.6133 | 0.6301 | 0.6216 | 0.4995 |
 | kNN | 0.8406 | 0.8869 | 0.6931 | 0.6065 | 0.6469 | 0.5466 |
 | Naive Bayes | 0.5366 | 0.7334 | 0.3360 | 0.9471 | 0.4960 | 0.3237 |
-| Random Forest | 0.8597 | 0.9113 | 0.7904 | 0.5676 | 0.6607 | 0.5878 |
+| Random Forest (Ensemble) | 0.8597 | 0.9113 | 0.7904 | 0.5676 | 0.6607 | 0.5878 |
 
 *(Full precision values are in `model/metrics.csv & model/metrics.json`, regenerated automatically each time `train_models.py` is run.)*
 
@@ -58,7 +58,7 @@ The following classification models were implemented on identical train/test spl
 | Decision Tree | Weakest of the tree-based/ensemble models — a single unpruned tree overfits the training data, which shows up as the lowest AUC (0.75) despite reasonable accuracy. Recall is its best metric, but precision and MCC lag behind the ensemble. |
 | kNN | Solid mid-table performance. Distance-based classification benefits from the scaled numeric features but is diluted by the high-dimensional one-hot-encoded categorical space, where "nearness" becomes less meaningful (the curse of dimensionality). |
 | Naive Bayes | Clearly the weakest model on this dataset. Its independence assumption is badly violated by correlated features (e.g., education vs. education.num, or occupation vs. hours.per.week), and GaussianNB assumes normality even for the one-hot encoded categorical columns. It does achieve the highest recall (0.947) because it aggressively predicts the >50K class, but at the cost of very low precision and accuracy near chance level for a class-imbalanced problem. |
-| Random Forest | Best overall model — highest accuracy, AUC, precision, and MCC. Averaging many depth-limited trees fixes the single tree's overfitting problem while still capturing non-linear interactions between features that Logistic Regression misses. Precision is notably higher than every other model, though recall is slightly lower, meaning it is more conservative about predicting the `>50K` class. |
+| Random Forest (Ensemble) | Best overall model — highest accuracy, AUC, precision, and MCC. Averaging many depth-limited trees fixes the single tree's overfitting problem while still capturing non-linear interactions between features that Logistic Regression misses. Precision is notably higher than every other model, though recall is slightly lower, meaning it is more conservative about predicting the `>50K` class. |
 | **Overall Winner** | **Random Forest (Ensemble)** — it has the best MCC (0.588), AUC (0.911), and accuracy (0.860) of all five models, and comes with the best precision by a clear margin. Logistic Regression is a strong, more interpretable runner-up with the best recall among the two strongest models and near-identical AUC. |
 
 ## Streamlit App Link
