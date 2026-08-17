@@ -58,9 +58,9 @@ from sklearn.metrics import (
 
 RANDOM_STATE = 42
 HERE = os.path.dirname(os.path.abspath(__file__))
-RAW_PATH = os.path.join(HERE, "..", "adult_income_raw.csv")
-CLEANED_PATH = os.path.join(HERE, "..", "adult_cleaned.csv")
-TEST_DATA_PATH = os.path.join(HERE, "..", "test_data.csv")
+RAW_PATH = os.path.join(HERE, "..", "data", "raw", "adult_income_raw.csv")
+CLEANED_PATH = os.path.join(HERE, "..", "data", "processed", "adult_cleaned.csv")
+TEST_DATA_PATH = os.path.join(HERE, "..", "data", "processed", "test_data.csv")
 METRICS_PATH = os.path.join(HERE, "..", "model", "metrics.csv")
 METRICS_JSON_PATH = os.path.join(HERE, "..", "model", "metrics.json")
 FEATURE_NAMES_PATH = os.path.join(HERE, "feature_names.pkl")
@@ -166,7 +166,7 @@ def evaluate(model, X_test, y_test) -> dict:
 
 
 def evaluate_detailed(model, X_test, y_test) -> dict:
-    """Richer metrics used to populate metrics.json for the Streamlit app's
+    """Msetrics used to populate metrics.json for the Streamlit app's
     default (no-upload) Model Metrics view: adds confusion matrix, a full
     classification report, and ROC curve points on top of evaluate()."""
     base = evaluate(model, X_test, y_test)
