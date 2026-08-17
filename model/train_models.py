@@ -1,7 +1,7 @@
 """
 train_models.py
 ----------------
-Trains 5 classification models on the UCI Adult / Census Income dataset:
+Trains 5 classification models on the Adult Census Income dataset:
 Logistic Regression, Decision Tree, K-Nearest Neighbour, Gaussian Naive Bayes,
 and Random Forest (Ensemble).
 
@@ -16,12 +16,17 @@ Outputs:
 - naive_bayes_model.pkl
 - random_forest_model.pkl
 - preprocessor.pkl
+- feature_names.pkl             (post-encoding feature names, for the feature-importance chart)
 - metrics.csv                   (comparison table used in the README)
+- metrics.json                  (per-model confusion matrix, ROC points, classification
+                                  report — powers the Streamlit app's default Model Metrics
+                                  tab so it has something to show before any file is uploaded)
 
 Run from inside the model/ folder:
     python train_models.py
 """
 
+import json
 import os
 import joblib
 import numpy as np
@@ -46,6 +51,9 @@ from sklearn.metrics import (
     recall_score,
     f1_score,
     matthews_corrcoef,
+    confusion_matrix,
+    classification_report,
+    roc_curve,
 )
 
 RANDOM_STATE = 42
@@ -54,6 +62,8 @@ RAW_PATH = os.path.join(HERE, "..", "adult_income_raw.csv")
 CLEANED_PATH = os.path.join(HERE, "..", "adult_cleaned.csv")
 TEST_DATA_PATH = os.path.join(HERE, "..", "test_data.csv")
 METRICS_PATH = os.path.join(HERE, "..", "model", "metrics.csv")
+METRICS_JSON_PATH = os.path.join(HERE, "..", "model", "metrics.json")
+FEATURE_NAMES_PATH = os.path.join(HERE, "feature_names.pkl")
 
 TARGET = "income"
 
@@ -155,6 +165,32 @@ def evaluate(model, X_test, y_test) -> dict:
     }
 
 
+def evaluate_detailed(model, X_test, y_test) -> dict:
+    """Richer metrics used to populate metrics.json for the Streamlit app's
+    default (no-upload) Model Metrics view: adds confusion matrix, a full
+    classification report, and ROC curve points on top of evaluate()."""
+    base = evaluate(model, X_test, y_test)
+    y_pred = model.predict(X_test)
+    y_proba = model.predict_proba(X_test)[:, 1]
+
+    cm = confusion_matrix(y_test, y_pred)
+    report = classification_report(
+        y_test, y_pred, target_names=["<=50K", ">50K"], output_dict=True, zero_division=0
+    )
+
+    fpr, tpr, _ = roc_curve(y_test, y_proba)
+    # Subsample ROC points so metrics.json stays small and fast to load.
+    if len(fpr) > 200:
+        idx = np.linspace(0, len(fpr) - 1, 200).astype(int)
+        fpr, tpr = fpr[idx], tpr[idx]
+
+    base["ConfusionMatrix"] = cm.tolist()
+    base["ClassificationReport"] = report
+    base["FPR"] = fpr.tolist()
+    base["TPR"] = tpr.tolist()
+    return base
+
+
 def main():
     print("Loading and cleaning dataset...")
     df = load_and_clean(RAW_PATH)
@@ -183,27 +219,44 @@ def main():
 
     joblib.dump(preprocessor, os.path.join(HERE, "preprocessor.pkl"), compress=3)
 
+    # Feature names after one-hot encoding, used by the app's feature-importance chart.
+    feature_names = preprocessor.get_feature_names_out().tolist()
+    joblib.dump(feature_names, FEATURE_NAMES_PATH, compress=3)
+
     results = []
+    metrics_json = {}
     models = get_models()
     for key, model in models.items():
         print(f"Training {DISPLAY_NAMES[key]}...")
         model.fit(X_train_t, y_train)
-        metrics = evaluate(model, X_test_t, y_test)
-        metrics["Model"] = DISPLAY_NAMES[key]
-        results.append(metrics)
+
+        detailed = evaluate_detailed(model, X_test_t, y_test)
+        display_name = DISPLAY_NAMES[key]
+        metrics_json[display_name] = detailed
+
+        summary = {k: v for k, v in detailed.items() if k in
+                   ("Accuracy", "AUC", "Precision", "Recall", "F1", "MCC")}
+        summary["Model"] = display_name
+        results.append(summary)
 
         model_path = os.path.join(HERE, f"{key}_model.pkl")
         joblib.dump(model, model_path, compress=3)
         print(f"  Saved -> {model_path}")
-        print(f"  {metrics}")
+        print(f"  {summary}")
 
     metrics_df = pd.DataFrame(results)[
         ["Model", "Accuracy", "AUC", "Precision", "Recall", "F1", "MCC"]
     ]
     metrics_df.to_csv(METRICS_PATH, index=False)
+
+    with open(METRICS_JSON_PATH, "w") as f:
+        json.dump(metrics_json, f)
+
     print("\nFinal comparison table:")
     print(metrics_df.to_string(index=False))
     print(f"\nMetrics saved to {METRICS_PATH}")
+    print(f"Detailed metrics saved to {METRICS_JSON_PATH}")
+    print(f"Feature names saved to {FEATURE_NAMES_PATH}")
 
 
 if __name__ == "__main__":
