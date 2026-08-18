@@ -166,7 +166,7 @@ def evaluate(model, X_test, y_test) -> dict:
 
 
 def evaluate_detailed(model, X_test, y_test) -> dict:
-    """Msetrics used to populate metrics.json for the Streamlit app's
+    """Metrics used to populate metrics.json for the Streamlit app's
     default (no-upload) Model Metrics view: adds confusion matrix, a full
     classification report, and ROC curve points on top of evaluate()."""
     base = evaluate(model, X_test, y_test)
